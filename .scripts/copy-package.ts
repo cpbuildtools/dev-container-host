@@ -1,5 +1,5 @@
 import { PackageJson } from "type-fest";
-import { readJsonFile, writeJsonFile } from "../src/utils/json";
+import { readJsonFile, writeJsonFile } from "@cpbuildtools/lib-node-utilities";
 
 (async () => {
   const pkg = (await readJsonFile("./package.json")) as PackageJson;
@@ -7,5 +7,5 @@ import { readJsonFile, writeJsonFile } from "../src/utils/json";
   delete pkg.scripts;
   delete (pkg as any)["lint-staged"];
 
-  await writeJsonFile("./dist/package.json", pkg, 2);
+  await writeJsonFile("./dist/main/package.json", pkg, 2);
 })();
