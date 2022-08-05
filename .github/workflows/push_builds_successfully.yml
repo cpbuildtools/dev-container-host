@@ -41,6 +41,8 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Init
+        env:
+          GITHUB_TOKEN: ${ github.token }
         run: pnpm i --ignore-scripts
 
       - name: Build
