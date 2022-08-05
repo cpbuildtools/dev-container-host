@@ -9,7 +9,7 @@ on:
 
 env:
   NODE_VERSION: 16.x
-
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   check-library-build:
     runs-on: ubuntu-latest
@@ -22,19 +22,14 @@ jobs:
           run_install: false
 
       - uses: actions/setup-node@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           node-version: "${{ env.NODE_VERSION }}"
           cache: pnpm
           registry-url: https://npm.pkg.github.com/
-      #    always-auth: true
-      #     scope: ${{ github.repository_owner }}
 
       - name: Init
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         run: pnpm i --ignore-scripts --frozen-lockfile
 
