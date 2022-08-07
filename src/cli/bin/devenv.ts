@@ -9,7 +9,7 @@ import { hideBin } from "yargs/helpers";
   try {
     await yargs(hideBin(process.argv))
       .scriptName("devenv")
-      .commandDir("../cli/commands/devenv", { extensions: ["js"], recurse: true })
+      .commandDir("../commands/devenv", { extensions: ["js"], recurse: true })
       .parse();
   } catch (e) {
     console.error(e);
