@@ -9,7 +9,9 @@ export const RemoveContainerCommand: CommandModule<{}, RemoveContainerCommandArg
       describe: "url of the container to clone",
       demandOption: true,
     }),
-  handler: async (args): Promise<void> => {},
+  handler: async (args): Promise<void> => {
+    throw new Error("NYI");
+  },
 };
 export interface RemoveContainerCommandArgs {
   path: string;

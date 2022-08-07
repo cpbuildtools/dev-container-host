@@ -9,7 +9,9 @@ export const CloneContainerCommand: CommandModule<{}, CloneContainerCommandArgs>
       describe: "url of the container to clone",
       demandOption: true,
     }),
-  handler: async (args): Promise<void> => {},
+  handler: async (args): Promise<void> => {
+    throw new Error("NYI");
+  },
 };
 
 interface CloneContainerCommandArgs {

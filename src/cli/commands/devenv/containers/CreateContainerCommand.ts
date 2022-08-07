@@ -15,7 +15,9 @@ export const CreateContainerCommand: CommandModule<{}, CreateContainerCommandArg
         describe: "url of the container template to use",
         demandOption: true,
       }),
-  handler: async (args): Promise<void> => {},
+  handler: async (args): Promise<void> => {
+    throw new Error("NYI");
+  },
 };
 
 interface CreateContainerCommandArgs {
