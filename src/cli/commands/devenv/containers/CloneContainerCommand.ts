@@ -1,7 +1,8 @@
 import { CommandModule } from "yargs";
+import { cloneContainer } from "../../../../lib/devenv/containers";
 
 export const CloneContainerCommand: CommandModule<{}, CloneContainerCommandArgs> = {
-  command: "clone <url>",
+  command: "clone <id | url>",
   describe: "Clone a container",
   builder: (yargs) =>
     yargs.positional("url", {
@@ -10,7 +11,7 @@ export const CloneContainerCommand: CommandModule<{}, CloneContainerCommandArgs>
       demandOption: true,
     }),
   handler: async (args): Promise<void> => {
-    throw new Error("NYI");
+    await cloneContainer(args.url);
   },
 };
 

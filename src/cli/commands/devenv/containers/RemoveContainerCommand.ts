@@ -1,18 +1,27 @@
+import { prompt } from "inquirer";
 import { CommandModule } from "yargs";
-
+import { removeContainer } from "../../../../lib/devenv/containers";
 export const RemoveContainerCommand: CommandModule<{}, RemoveContainerCommandArgs> = {
-  command: "remove <path>",
+  command: "remove <container-id>",
   describe: "Remove a container",
   builder: (yargs) =>
-    yargs.positional("path", {
+    yargs.positional("containerId", {
       type: "string",
-      describe: "url of the container to clone",
+      describe: "id of the container to remove",
       demandOption: true,
     }),
   handler: async (args): Promise<void> => {
-    throw new Error("NYI");
+    const answers = await prompt({
+      type: "confirm",
+      name: "remove",
+      message: "Are you sure you want to delete this development container? Any Uncommitted data will be lost!",
+      default: false,
+    });
+    if (answers.remove) {
+      await removeContainer(args.containerId);
+    }
   },
 };
 export interface RemoveContainerCommandArgs {
-  path: string;
+  containerId: string;
 }

@@ -1,7 +1,6 @@
 import { CommandModule } from "yargs";
-import { RemoveContainerCommandArgs } from "./RemoveContainerCommand";
 
-export const ContainerMenuCommand: CommandModule<{}, RemoveContainerCommandArgs> = {
+export const ContainerMenuCommand: CommandModule<{}, {}> = {
   command: "$0",
   describe: false,
   builder: (yargs) =>

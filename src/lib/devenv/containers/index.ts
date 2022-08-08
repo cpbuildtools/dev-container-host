@@ -1,34 +1,10 @@
-import { getContainerLaunchUrl, readJsonFile } from "@cpbuildtools/lib-node-utilities";
+import { clone, getContainerLaunchUrl, readJsonFile } from "@cpbuildtools/lib-node-utilities";
 import glob from "fast-glob";
+import { readdir, rm, rmdir } from "fs/promises";
 import Path from "path/posix";
 import { DEFAULT_CONTAINER_ROOT, loadConfig } from "../config";
-
-interface DevEnvironment {
-  path: string;
-  config: any;
-  containers: DevContainer[];
-}
-
-interface DevContainer {
-  id: string;
-  name: string;
-  owner: string;
-  path: string;
-  config: any;
-  launchUrl?: string;
-  hostLaunchUrl?: string;
-  workspaces: DevWorkspace[];
-}
-
-interface DevWorkspace {
-  name: string;
-  container: string;
-  path: string;
-  internalPath: string;
-  config: any;
-  launchUrl?: string;
-  hostLaunchUrl?: string;
-}
+import { DevContainer } from "./DevContainer";
+import { DevEnvironment } from "./DevEnvironment";
 
 async function loadEnvironmentData() {
   const config = await loadConfig();
@@ -88,4 +64,36 @@ async function loadEnvironmentData() {
 export async function listContainers() {
   const env = await loadEnvironmentData();
   return env.containers;
+}
+
+export function githubUrlToContainerId(containerIdOrUrl: string): string {
+  if (containerIdOrUrl.startsWith("https://github.com/")) {
+    containerIdOrUrl = containerIdOrUrl.slice("https://github.com/".length);
+    if (Path.extname(containerIdOrUrl)) {
+      containerIdOrUrl = containerIdOrUrl.slice(0, -Path.extname(containerIdOrUrl).length);
+    }
+  }
+  return containerIdOrUrl;
+}
+
+export async function cloneContainer(containerIdOrUrl: string) {
+  const containerId = githubUrlToContainerId(containerIdOrUrl);
+  const config = await loadConfig();
+  const env = await loadEnvironmentData();
+  let container = env.containers.find((c) => c.id === containerId);
+  if (!container) {
+    await clone(containerId, containerId, config?.containerRoot!);
+  }
+  return container;
+}
+export async function removeContainer(containerId: string) {
+  const env = await loadEnvironmentData();
+  let container = env.containers.find((c) => c.id === containerId);
+  if (container) {
+    await rm(container.path, { force: true, recursive: true });
+    const ownerDir = Path.dirname(container.path);
+    if (!(await readdir(ownerDir)).length) {
+      await rmdir(ownerDir);
+    }
+  }
 }
