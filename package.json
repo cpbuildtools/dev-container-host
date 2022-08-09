@@ -10,6 +10,7 @@
   "scripts": {
     "prepare": "run-s prepare:* && husky install",
     "prepare:husky": "husky install",
+    "prepare:link-util": "pnpm link --global @cpbuildtools/lib-node-utilities",
     "prepare:build": "pnpm run build",
     "prepare:link": "cd ./dist/main && pnpm unlink && pnpm link --global",
     "build": "run-s build:*",

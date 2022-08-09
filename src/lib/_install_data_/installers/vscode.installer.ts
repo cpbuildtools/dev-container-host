@@ -12,7 +12,7 @@ const VsCodeInstaller: Installer = {
       }
       async afterInstall(): Promise<void> {}
     },
-    [Platform.LINUX]: class DockerLinuxInstaller extends AptInstaller {
+    [Platform.LINUX]: class VsCodeLinuxInstaller extends AptInstaller {
       constructor() {
         super("vscode", "Microsoft Visual Studio Code");
       }
