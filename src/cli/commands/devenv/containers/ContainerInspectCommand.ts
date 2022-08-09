@@ -32,7 +32,6 @@ export const ContainerInspectCommand: CommandModule<{}, ContainerInspectCommandA
         { cliColor: true }
       );
     }
-    //console.log(container);
   },
 };
 interface ContainerInspectCommandArgs {

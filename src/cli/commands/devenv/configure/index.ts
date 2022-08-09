@@ -36,7 +36,7 @@ export const GetConfigPropCommand: CommandModule<{}, GetConfigPropCommandArgs> =
     }) as Argv<GetConfigPropCommandArgs>,
   handler: async (args): Promise<void> => {
     const value = await getConfigProperty(args.property);
-    console.log(toFormattedYaml(value, { cliColor: true }));
+    console.info(toFormattedYaml(value, { cliColor: true }));
   },
 };
 export const CheckConfigCommand: CommandModule<{}, CheckConfigCommandArgs> = {
