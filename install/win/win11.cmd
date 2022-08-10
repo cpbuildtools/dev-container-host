@@ -1,3 +1,4 @@
+@echo off
 wsl --status > nul 2>&1 || goto installWSL
 
 wsl --update
