@@ -4,7 +4,6 @@ wsl --update
 echo wsl --shutdown
 wsl --shutdown
 wsl --set-default-version 2 > nul 2>&1
-
 echo WSL ready.
 
 set "repo=https://raw.githubusercontent.com/cpbuildtools/dev-host/main"
@@ -14,8 +13,8 @@ mkdir %tmpPath% > nul 2>&1
 curl --ssl --silent  %repo%/install/win/install-host.cmd > %tmpPath%\install.cmd
 cd %tmpPath%
 install.cmd
-goto :eof
 
+goto :eof
 
 
 :installWSL
