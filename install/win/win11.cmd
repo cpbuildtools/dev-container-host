@@ -9,7 +9,7 @@ echo WSL ready.
 
 set "repo=https://raw.githubusercontent.com/cpbuildtools/dev-host/main"
 set "rng=%random%%random%%random%"
-set "tmpPath=%temp%\dev-host-hostinstaller-%rng%"
+set "tmpPath=%temp%\cpbuildtools\dev-host\win11\%rng%"
 mkdir %tmpPath% > nul 2>&1
 curl --ssl --silent  %repo%/install/win/install-host.cmd > %tmpPath%\install.cmd
 cd %tmpPath%

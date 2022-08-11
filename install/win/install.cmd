@@ -11,7 +11,7 @@ setlocal
 
   set "repo=https://raw.githubusercontent.com/cpbuildtools/dev-host/main"
   set "rng=%random%%random%%random%"
-  set "tmpPath=%temp%\dev-host-installer-%rng%"
+  set "tmpPath=%temp%\cpbuildtools\dev-host\install\%rng%"
   mkdir %tmpPath% > nul 2>&1
 
   echo [96mDetecting Windows version...[0m
